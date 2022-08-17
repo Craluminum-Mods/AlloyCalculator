@@ -100,6 +100,19 @@ namespace AlloyCalculator
       }
     }
 
+    private string GetRatiosText
+    {
+      get
+      {
+        var sb = new StringBuilder();
+        sb
+          .Append("\n[ ")
+          .Append(string.Join(", ", GetRatios(CurrentAlloyRecipe).ToList().ConvertAll(x => x.ToString()).ToArray()))
+          .Append(" ]");
+        return sb.ToString();
+      }
+    }
+
     private void ComposeDialog()
     {
       ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterFixed);
@@ -259,20 +272,11 @@ namespace AlloyCalculator
 
     private void UpdateHelpText()
     {
-      string alloyCode = "";
-      string ratios = "";
-      if (CurrentAlloyRecipe is not null && CurrentAlloyRecipe.Ingredients.Length is not 0) alloyCode = CurrentAlloyRecipe.Output.Code.ToString();
-
-      var sb = new StringBuilder();
-      sb
-        .Append("\n[ ")
-        .Append(string.Join(", ", GetRatios(CurrentAlloyRecipe).ToList().ConvertAll(x => x.ToString()).ToArray()))
-        .Append(" ]");
-      ratios = sb.ToString();
+      string alloyCode = CurrentAlloyRecipe.Output.Code.ToString();
 
       SingleComposer
       .GetDynamicText("alloys")
-      .SetNewText($"{TextCurrent} {alloyCode}{ratios}\n\n{ListOfAlloys}");
+      .SetNewText($"{TextCurrent} {alloyCode}{GetRatiosText}\n\n{ListOfAlloys}");
 
       TryCalculate(InputText);
       if (NuggetsOutputText != null)
