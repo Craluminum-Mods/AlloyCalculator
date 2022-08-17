@@ -33,7 +33,6 @@ namespace AlloyCalculator
     private string TextLocked => $" ({Lang.Get("alloycalculator:Locked")})";
     private string TextRequiredNuggets => $"{Lang.Get("alloycalculator:Required nuggets")}";
     private string HoverTextUnits => Lang.Get("alloycalculator:Each nugget is equal to 5 units");
-    private CairoFont BoldText => CairoFont.WhiteDetailText().WithWeight(FontWeight.Bold);
     private CairoFont FontSize(int size) => CairoFont.WhiteDetailText().WithFontSize(size);
 
     private AlloyRecipe CurrentAlloyRecipe { get; set; }
@@ -138,7 +137,7 @@ namespace AlloyCalculator
       bgBounds.WithChildren(leftColumn, rightColumn);
       SingleComposer = capi.Gui.CreateCompo("alloycalculator", dialogBounds)
       .AddShadedDialogBG(bgBounds)
-      .AddDialogTitleBar(TextAlloyCalculator, OnTitleBarCloseClicked, BoldText)
+      .AddDialogTitleBar(TextAlloyCalculator, OnTitleBarCloseClicked, CairoFont.WhiteSmallText())
       .AddStaticText(TextAlloy, FontSize(18), textAlloyBounds, "dropdown_description")
       .AddDropDown(MetalAlloyCodes, MetalAlloyNames, 0, (newval, on) => UpdateDropDown(newval), dropDownBounds, "dropdown")
       .AddStaticText(TextUnits, FontSize(18), textUnitsBounds, "textinput_description")
