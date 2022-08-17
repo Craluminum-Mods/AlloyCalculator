@@ -143,6 +143,7 @@ namespace AlloyCalculator
       .AddStaticText(TextAlloy, FontSize(18), textAlloyBounds, "dropdown_description")
       .AddDropDown(MetalAlloyCodes, MetalAlloyNames, 0, (newval, on) => UpdateDropDown(newval), dropDownBounds, "dropdown")
       .AddStaticText(TextUnits, FontSize(18), textUnitsBounds, "textinput_description")
+      .AddAutoSizeHoverText(HoverTextUnits, FontSize(18), 300, textUnitsBounds, "units_hovertext")
       .AddTextInput(textInputBounds, OnTextChanged, null, "textinput")
       .AddDynamicText("", FontSize(13), rightColumn, "alloys")
       .AddSlider(null, slider1Bounds, "slider1")
