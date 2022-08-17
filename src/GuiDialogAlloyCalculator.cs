@@ -153,7 +153,8 @@ namespace AlloyCalculator
       .AddDynamicText("", FontSize(18), slider2TextBounds, "percent2")
       .AddDynamicText("", FontSize(18), slider3TextBounds, "percent3")
       .AddDynamicText("", FontSize(18), slider4TextBounds, "percent4")
-      .AddDynamicText("PLACEHOLDER", FontSize(18), textNuggetsBounds, "nuggets")
+      .AddDynamicText("", FontSize(18), textNuggetsBounds, "nuggets")
+      .AddDynamicText("", FontSize(16), textErrorBounds, "error_text")
       .Compose();
     }
 
