@@ -156,6 +156,8 @@ namespace AlloyCalculator
       .AddDynamicText("", FontSize(18), textNuggetsBounds, "nuggets")
       .AddDynamicText("", FontSize(16), textErrorBounds, "error_text")
       .Compose();
+
+      UpdateDropDown(SingleComposer.GetDropDown("dropdown").SelectedValue);
     }
 
     private AlloyRecipe GetAlloyRecipe(string alloyCode)
