@@ -59,7 +59,7 @@ namespace AlloyCalculator
     {
       get
       {
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
 
         foreach (var val in capi.GetMetalAlloys())
         {
@@ -298,7 +298,7 @@ namespace AlloyCalculator
 
     private bool TryCalculate(string text)
     {
-      List<int> output = new();
+      var output = new List<int>();
       bool isint = int.TryParse(text, out int input);
 
       if (!isint || input % 5 != 0 || input < 100)
@@ -332,7 +332,7 @@ namespace AlloyCalculator
 
     private string GetNuggetsOutput(List<int> input)
     {
-      StringBuilder sb = new();
+      var sb = new StringBuilder();
 
       sb.Append(TextRequiredNuggets).AppendLine(":").AppendLine();
 
