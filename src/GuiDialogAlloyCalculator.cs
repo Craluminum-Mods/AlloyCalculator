@@ -320,7 +320,7 @@ namespace AlloyCalculator
     {
       StringBuilder sb = new();
 
-      sb.AppendLine(TextNeededNuggets);
+      sb.Append(TextRequiredNuggets).AppendLine(":").AppendLine();
 
       for (int j = 0; j < CurrentAlloyRecipe.Ingredients.Length; j++)
       {
