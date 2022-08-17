@@ -55,23 +55,6 @@ namespace AlloyCalculator
       SingleComposer.GetDynamicText("percent4")
     };
 
-    private static readonly ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterFixed);
-    private static readonly ElementBounds leftColumn = ElementBounds.Fixed(0, 50, 240, 420);
-    private static readonly ElementBounds rightColumn = leftColumn.RightCopy().FixedRightOf(leftColumn, 100);
-    private static readonly ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
-    private static readonly ElementBounds dropDownBounds = ElementBounds.Fixed(EnumDialogArea.CenterFixed, 120, 40, 240, 20);
-    private static readonly ElementBounds textInputBounds = ElementBounds.Fixed(EnumDialogArea.CenterFixed, dropDownBounds.fixedX - 300, dropDownBounds.fixedY, 80, 20);
-    private static readonly ElementBounds textAlloyBounds = ElementBounds.Fixed(dropDownBounds.Alignment, dropDownBounds.absFixedX, dropDownBounds.fixedY - 3, 120, dropDownBounds.fixedHeight);
-    private static readonly ElementBounds textUnitsBounds = ElementBounds.Fixed(textInputBounds.Alignment, textInputBounds.fixedX - 40, textInputBounds.fixedY - 3, 120, textInputBounds.fixedHeight);
-    private static readonly ElementBounds textNuggetsBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX + 180, textUnitsBounds.fixedY + 250, 500, 500);
-    private static readonly ElementBounds slider1Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, textUnitsBounds.fixedY + 50, 120, textUnitsBounds.fixedHeight);
-    private static readonly ElementBounds slider2Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, textUnitsBounds.fixedY + 100, 120, textUnitsBounds.fixedHeight);
-    private static readonly ElementBounds slider3Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, textUnitsBounds.fixedY + 150, 120, textUnitsBounds.fixedHeight);
-    private static readonly ElementBounds slider4Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, textUnitsBounds.fixedY + 200, 120, textUnitsBounds.fixedHeight);
-    private static readonly ElementBounds slider1TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider1Bounds.fixedX + 180, slider1Bounds.fixedY - 3, 200, slider1Bounds.fixedHeight);
-    private static readonly ElementBounds slider2TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider2Bounds.fixedX + 180, slider2Bounds.fixedY - 3, 200, slider2Bounds.fixedHeight);
-    private static readonly ElementBounds slider3TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider3Bounds.fixedX + 180, slider3Bounds.fixedY - 3, 200, slider3Bounds.fixedHeight);
-    private static readonly ElementBounds slider4TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider4Bounds.fixedX + 180, slider4Bounds.fixedY - 3, 200, slider4Bounds.fixedHeight);
 
     private string ListOfAlloys
     {
@@ -119,6 +102,26 @@ namespace AlloyCalculator
 
     private void ComposeDialog()
     {
+      ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterFixed);
+      ElementBounds leftColumn = ElementBounds.Fixed(0, 50, 240, 500);
+      ElementBounds rightColumn = leftColumn.RightCopy().FixedRightOf(leftColumn, 100);
+      ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
+      ElementBounds dropDownBounds = ElementBounds.Fixed(EnumDialogArea.CenterFixed, 120, 40, 240, 20);
+      ElementBounds textInputBounds = ElementBounds.Fixed(EnumDialogArea.CenterFixed, dropDownBounds.fixedX - 300, dropDownBounds.fixedY, 80, 20);
+      ElementBounds textAlloyBounds = ElementBounds.Fixed(dropDownBounds.Alignment, dropDownBounds.absFixedX, dropDownBounds.fixedY - 3, 120, dropDownBounds.fixedHeight);
+      ElementBounds textUnitsBounds = ElementBounds.Fixed(textInputBounds.Alignment, textInputBounds.fixedX - 40, textInputBounds.fixedY - 3, 150, textInputBounds.fixedHeight);
+      ElementBounds textErrorBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX + 60, textUnitsBounds.fixedY + 50, 250, textUnitsBounds.fixedHeight + 50);
+
+      ElementBounds slider1Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, textErrorBounds.fixedY + 50, 120, textUnitsBounds.fixedHeight);
+      ElementBounds slider2Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, slider1Bounds.fixedY + 50, 120, textUnitsBounds.fixedHeight);
+      ElementBounds slider3Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, slider2Bounds.fixedY + 50, 120, textUnitsBounds.fixedHeight);
+      ElementBounds slider4Bounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX, slider3Bounds.fixedY + 50, 120, textUnitsBounds.fixedHeight);
+      ElementBounds slider1TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider1Bounds.fixedX + 180, slider1Bounds.fixedY - 3, 200, slider1Bounds.fixedHeight);
+      ElementBounds slider2TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider2Bounds.fixedX + 180, slider2Bounds.fixedY - 3, 200, slider2Bounds.fixedHeight);
+      ElementBounds slider3TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider3Bounds.fixedX + 180, slider3Bounds.fixedY - 3, 200, slider3Bounds.fixedHeight);
+      ElementBounds slider4TextBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, slider4Bounds.fixedX + 180, slider4Bounds.fixedY - 3, 200, slider4Bounds.fixedHeight);
+      ElementBounds textNuggetsBounds = ElementBounds.Fixed(textUnitsBounds.Alignment, textUnitsBounds.fixedX + 180, slider4Bounds.fixedY + 50, 500, 500);
+
       bgBounds.BothSizing = ElementSizing.FitToChildren;
       bgBounds.WithChildren(leftColumn, rightColumn);
       SingleComposer = capi.Gui.CreateCompo("alloycalculator", dialogBounds)
