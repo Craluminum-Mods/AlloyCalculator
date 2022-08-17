@@ -1,0 +1,8 @@
+{
+  "type": "code",
+  "side": "client",
+  "modid": "alloycalculator",
+  "name": "Alloy Calculator",
+  "authors": ["Craluminum2413"],
+  "version": "1.0.0"
+}
