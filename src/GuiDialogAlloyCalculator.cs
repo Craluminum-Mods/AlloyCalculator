@@ -30,6 +30,7 @@ namespace AlloyCalculator
     private string TextAlloyCalculator => Lang.Get("alloycalculator:Alloy Calculator");
     private string TextUnits => $"{Lang.Get("alloycalculator:Units")}:";
     private string TextLocked => $" ({Lang.Get("alloycalculator:Locked")})";
+    private string TextNeededNuggets => $"{Lang.Get("alloycalculator:Needed nuggets")}";
     private CairoFont BoldText => CairoFont.WhiteDetailText().WithWeight(FontWeight.Bold);
     private CairoFont FontSize(int size) => CairoFont.WhiteDetailText().WithFontSize(size);
 
@@ -321,7 +322,7 @@ namespace AlloyCalculator
     {
       StringBuilder sb = new();
 
-      sb.AppendLine("Needed nuggets:\n");
+      sb.AppendLine(TextNeededNuggets);
 
       for (int j = 0; j < CurrentAlloyRecipe.Ingredients.Length; j++)
       {
