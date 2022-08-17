@@ -22,15 +22,17 @@ namespace AlloyCalculator
 
     private readonly long id;
     private string InputText { get; set; }
+    private string NuggetsOutputText { get; set; }
 
     public override string ToggleKeyCombinationCode => "alloycalculator";
-    private string TextInputError => $"{Lang.Get("alloycalculator:Wrong input")}";
+    private string TextInputError => $"{Lang.Get("alloycalculator:TextInputError")}";
     private string TextAlloy => $"{Lang.Get("alloycalculator:Alloy")}:";
     private string TextCurrent => $"{Lang.Get("alloycalculator:Current")}:";
     private string TextAlloyCalculator => Lang.Get("alloycalculator:Alloy Calculator");
     private string TextUnits => $"{Lang.Get("alloycalculator:Units")}:";
     private string TextLocked => $" ({Lang.Get("alloycalculator:Locked")})";
-    private string TextNeededNuggets => $"{Lang.Get("alloycalculator:Needed nuggets")}";
+    private string TextRequiredNuggets => $"{Lang.Get("alloycalculator:Required nuggets")}";
+    private string HoverTextUnits => Lang.Get("alloycalculator:Each nugget is equal to 5 units");
     private CairoFont BoldText => CairoFont.WhiteDetailText().WithWeight(FontWeight.Bold);
     private CairoFont FontSize(int size) => CairoFont.WhiteDetailText().WithFontSize(size);
 

@@ -4,7 +4,9 @@
   "Current": "Current",
   "Units": "Units",
   "Locked": "Locked",
-  "Wrong input": "Wrong input",
-  "Needed nuggets": "Needed nuggets",
+  "TextInputError": "The minimum value is 100, which is equal to 1 ingot",
+  "Each nugget is equal to 5 units": "Each nugget is equal to 5 units",
+  "Required nuggets": "Required nuggets",
+  "Alloy not selected": "Alloy not selected",
   "Open 'Alloy Calculator'": "Open 'Alloy Calculator'"
 }
