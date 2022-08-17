@@ -55,7 +55,6 @@ namespace AlloyCalculator
       SingleComposer.GetDynamicText("percent4")
     };
 
-
     private string ListOfAlloys
     {
       get
@@ -279,12 +278,18 @@ namespace AlloyCalculator
       .GetDynamicText("alloys")
       .SetNewText($"{TextCurrent} {alloyCode}{GetRatiosText}\n\n{ListOfAlloys}");
 
-      TryCalculate(InputText);
-      if (NuggetsOutputText != null)
+      SingleComposer.GetDynamicText("nuggets").SetNewText(NuggetsOutputText ?? "");
+
+      if (!TryCalculate(InputText))
       {
-        SingleComposer
-      .GetDynamicText("nuggets").SetNewText(NuggetsOutputText);
+        SingleComposer.GetDynamicText("error_text").SetNewText(TextInputError);
       }
+      else
+      {
+        SingleComposer.GetDynamicText("error_text").SetNewText("");
+      }
+
+      TryCalculate(InputText);
       TryAdjustSliders();
     }
 
