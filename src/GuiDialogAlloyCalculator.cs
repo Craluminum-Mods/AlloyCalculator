@@ -152,7 +152,7 @@ namespace AlloyCalculator
       return (AlloyRecipe)Enumerable.Empty<AlloyRecipe>();
     }
 
-    private static int GetAverage(int min, int max) => (min + max) / 2;
+    private int GetAverage(int min, int max) => (min + max) / 2;
 
     private void SetSlidersOnce()
     {
@@ -237,7 +237,7 @@ namespace AlloyCalculator
       SingleComposer.ReCompose();
     }
 
-    private static IEnumerable<int> GetRatios(AlloyRecipe recipe)
+    private IEnumerable<int> GetRatios(AlloyRecipe recipe)
     {
       return recipe?.Ingredients?.Select(ingredient =>
       {
