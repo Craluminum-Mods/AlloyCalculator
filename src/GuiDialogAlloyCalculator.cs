@@ -199,6 +199,7 @@ namespace AlloyCalculator
     {
       // Clear previous values
       foreach (var percent in PercentTexts) percent.SetNewText("");
+      foreach (var slider in Sliders) slider.Enabled = true;
 
       if (CurrentAlloyRecipe.Ingredients.Length is 2)
       {
@@ -210,7 +211,6 @@ namespace AlloyCalculator
 
       if (CurrentAlloyRecipe.Ingredients.Length is 3)
       {
-        Sliders[1].Enabled = true;
         Sliders[2].Enabled = false;
         LockedSlider = Sliders[2];
         PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
@@ -220,8 +220,6 @@ namespace AlloyCalculator
 
       if (CurrentAlloyRecipe.Ingredients.Length is 4)
       {
-        Sliders[1].Enabled = true;
-        Sliders[2].Enabled = true;
         Sliders[3].Enabled = false;
         LockedSlider = Sliders[3];
         PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
