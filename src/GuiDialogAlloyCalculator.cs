@@ -47,7 +47,13 @@ namespace AlloyCalculator
       SingleComposer.GetSlider("slider4")
     };
 
-    private string NuggetsOutputText { get; set; }
+    private List<GuiElementDynamicText> PercentTexts => new()
+    {
+      SingleComposer.GetDynamicText("percent1"),
+      SingleComposer.GetDynamicText("percent2"),
+      SingleComposer.GetDynamicText("percent3"),
+      SingleComposer.GetDynamicText("percent4")
+    };
 
     private static readonly ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog.WithAlignment(EnumDialogArea.CenterFixed);
     private static readonly ElementBounds leftColumn = ElementBounds.Fixed(0, 50, 240, 420);
@@ -172,25 +178,15 @@ namespace AlloyCalculator
 
     private void TryAdjustSliders()
     {
-      if (CurrentAlloyRecipe is null) return;
-
-      var dtext1 = SingleComposer.GetDynamicText("percent1");
-      var dtext2 = SingleComposer.GetDynamicText("percent2");
-      var dtext3 = SingleComposer.GetDynamicText("percent3");
-      var dtext4 = SingleComposer.GetDynamicText("percent4");
-
       // Clear previous values
-      dtext1.SetNewText("");
-      dtext2.SetNewText("");
-      dtext3.SetNewText("");
-      dtext4.SetNewText("");
+      foreach (var percent in PercentTexts) percent.SetNewText("");
 
       if (CurrentAlloyRecipe.Ingredients.Length is 2)
       {
         Sliders[1].Enabled = false;
         LockedSlider = Sliders[1];
-        dtext1.SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
-        dtext2.SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
+        PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
+        PercentTexts[1].SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
       }
 
       if (CurrentAlloyRecipe.Ingredients.Length is 3)
@@ -198,9 +194,9 @@ namespace AlloyCalculator
         Sliders[1].Enabled = true;
         Sliders[2].Enabled = false;
         LockedSlider = Sliders[2];
-        dtext1.SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
-        dtext2.SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
-        dtext3.SetNewText($"{Sliders[2].GetValue()}%{IsLocked(Sliders[2])}");
+        PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
+        PercentTexts[1].SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
+        PercentTexts[2].SetNewText($"{Sliders[2].GetValue()}%{IsLocked(Sliders[2])}");
       }
 
       if (CurrentAlloyRecipe.Ingredients.Length is 4)
@@ -209,10 +205,10 @@ namespace AlloyCalculator
         Sliders[2].Enabled = true;
         Sliders[3].Enabled = false;
         LockedSlider = Sliders[3];
-        dtext1.SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
-        dtext2.SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
-        dtext3.SetNewText($"{Sliders[2].GetValue()}%{IsLocked(Sliders[2])}");
-        dtext4.SetNewText($"{Sliders[3].GetValue()}%{IsLocked(Sliders[3])}");
+        PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
+        PercentTexts[1].SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
+        PercentTexts[2].SetNewText($"{Sliders[2].GetValue()}%{IsLocked(Sliders[2])}");
+        PercentTexts[3].SetNewText($"{Sliders[3].GetValue()}%{IsLocked(Sliders[3])}");
       }
 
       var first = Sliders[0].GetValue();
