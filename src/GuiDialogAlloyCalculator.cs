@@ -301,9 +301,9 @@ namespace AlloyCalculator
       List<int> output = new();
       bool isint = int.TryParse(text, out int input);
 
-      if (!isint || input % 5 != 0 || CurrentAlloyRecipe is null || input < 100)
+      if (!isint || input % 5 != 0 || input < 100)
       {
-        InputText = TextInputError;
+        InputText = "";
         NuggetsOutputText = "";
         return false;
       }
