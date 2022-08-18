@@ -312,6 +312,17 @@ namespace AlloyCalculator
       return true;
     }
 
+    // For compatibility with 1.16.5 and lower
+    public string EndVariant(string path)
+    {
+      int i = path.LastIndexOf('-');
+      if (i < 0)
+      {
+        return "";
+      }
+      return path.Substring(i + 1);
+    }
+
     private string GetNuggetsOutput(List<int> input)
     {
       var sb = new StringBuilder();
@@ -320,7 +331,7 @@ namespace AlloyCalculator
 
       for (int j = 0; j < CurrentAlloyRecipe.Ingredients.Length; j++)
       {
-        var variant = CurrentAlloyRecipe.Ingredients[j].Code.EndVariant();
+        var variant = EndVariant(CurrentAlloyRecipe.Ingredients[j].Code.ToString());
         sb.Append(Lang.Get("material-" + variant));
         sb.Append(":\t").Append(input[j]).AppendLine();
       }
