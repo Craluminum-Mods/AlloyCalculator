@@ -342,6 +342,8 @@ namespace AlloyCalculator
     public override bool TryClose()
     {
       capi.World.UnregisterGameTickListener(_timerId);
+      InputText = "";
+      NuggetsOutputText = "";
       return base.TryClose();
     }
   }
