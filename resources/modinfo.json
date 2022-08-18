@@ -5,5 +5,8 @@
   "name": "Alloy Calculator",
   "description": "In-game alloy calculator. \nCalculates amount of needed nuggets by metal units.",
   "authors": ["Craluminum2413"],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "game": "1.17.0-rc.1"
+  }
 }
