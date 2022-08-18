@@ -260,10 +260,12 @@ namespace AlloyCalculator
 
       if (!TryCalculate(InputText))
       {
+        SingleComposer.GetTextInput("textinput").Font.Color = ColorUtil.Hex2Doubles("#DC143C");
         SingleComposer.GetDynamicText("error_text").SetNewText(TextInputError);
       }
       else
       {
+        SingleComposer.GetTextInput("textinput").Font.Color = ColorUtil.Hex2Doubles("#FFFFFF");
         SingleComposer.GetDynamicText("error_text").SetNewText("");
       }
 
