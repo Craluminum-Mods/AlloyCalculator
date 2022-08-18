@@ -3,9 +3,9 @@ using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Config;
 using Vintagestory.GameContent;
-using Cairo;
 using System.Linq;
 using System;
+using Vintagestory.API.MathTools;
 
 namespace AlloyCalculator
 {
