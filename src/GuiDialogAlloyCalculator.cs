@@ -154,7 +154,6 @@ namespace AlloyCalculator
 
     private bool OnNewSliderValue(int num)
     {
-      if (!TryCalculate(InputText)) return false;
       return true;
     }
 
