@@ -167,6 +167,8 @@ namespace AlloyCalculator
 
     private void SetSlidersOnce()
     {
+      foreach (var slider in Sliders) slider.Enabled = true;
+
       for (int i = 0; i < 4; ++i)
       {
         var slider = SingleComposer.GetSlider($"slider{i + 1}");
@@ -180,9 +182,13 @@ namespace AlloyCalculator
         else
         {
           slider.SetValues(0, 0, 1, 1);
+          slider.Enabled = false;
         }
         slider.Enabled = i < CurrentAlloyRecipe.Ingredients.Length;
       }
+
+      LockedSlider = Sliders[CurrentAlloyRecipe.Ingredients.Length - 1];
+      LockedSlider.Enabled = false;
     }
 
     private string IsLocked(GuiElementSlider slider) => slider == LockedSlider ? TextLocked : "";
@@ -191,59 +197,28 @@ namespace AlloyCalculator
     {
       // Clear previous values
       foreach (var percent in PercentTexts) percent.SetNewText("");
-      foreach (var slider in Sliders) slider.Enabled = true;
 
-      if (CurrentAlloyRecipe.Ingredients.Length is 2)
+      foreach (var slider in Sliders)
       {
-        Sliders[1].Enabled = false;
-        LockedSlider = Sliders[1];
-        PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
-        PercentTexts[1].SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
+        var sliderIndex = Sliders.IndexOf(slider);
+        if (sliderIndex < CurrentAlloyRecipe.Ingredients.Length)
+        {
+          PercentTexts[sliderIndex].SetNewText(slider.GetValue() + "%" + IsLocked(slider));
+        }
       }
 
-      if (CurrentAlloyRecipe.Ingredients.Length is 3)
+      var sum = 0;
+      var sum2 = 100;
+      foreach (var slider in Sliders)
       {
-        Sliders[2].Enabled = false;
-        LockedSlider = Sliders[2];
-        PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
-        PercentTexts[1].SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
-        PercentTexts[2].SetNewText($"{Sliders[2].GetValue()}%{IsLocked(Sliders[2])}");
+        var sliderIndex = Sliders.IndexOf(slider);
+        if (sliderIndex < CurrentAlloyRecipe.Ingredients.Length) sum += slider.GetValue();
+        if (sliderIndex < CurrentAlloyRecipe.Ingredients.Length - 1) sum2 -= slider.GetValue();
       }
-
-      if (CurrentAlloyRecipe.Ingredients.Length is 4)
+      if (sum is < 100 or > 100)
       {
-        Sliders[3].Enabled = false;
-        LockedSlider = Sliders[3];
-        PercentTexts[0].SetNewText($"{Sliders[0].GetValue()}%{IsLocked(Sliders[0])}");
-        PercentTexts[1].SetNewText($"{Sliders[1].GetValue()}%{IsLocked(Sliders[1])}");
-        PercentTexts[2].SetNewText($"{Sliders[2].GetValue()}%{IsLocked(Sliders[2])}");
-        PercentTexts[3].SetNewText($"{Sliders[3].GetValue()}%{IsLocked(Sliders[3])}");
+        LockedSlider.SetValue(sum2);
       }
-
-      var first = Sliders[0].GetValue();
-      var second = Sliders[1].GetValue();
-      var third = Sliders[2].GetValue();
-      var fourth = Sliders[3].GetValue();
-
-      if (CurrentAlloyRecipe.Ingredients.Length is 2
-      && first + second is < 100 or > 100)
-      {
-        LockedSlider.SetValue(100 - first);
-      }
-
-      if (CurrentAlloyRecipe.Ingredients.Length is 3
-      && first + second + third is < 100 or > 100)
-      {
-        LockedSlider.SetValue(100 - first - second);
-      }
-
-      if (CurrentAlloyRecipe.Ingredients.Length is 4
-      && first + second + third + fourth is < 100 or > 100)
-      {
-        LockedSlider.SetValue(100 - first - second - third);
-      }
-
-      SingleComposer.ReCompose();
     }
 
     private IEnumerable<int> GetRatios(AlloyRecipe recipe)
