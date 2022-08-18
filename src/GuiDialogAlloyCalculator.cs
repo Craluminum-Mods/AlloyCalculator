@@ -256,6 +256,16 @@ namespace AlloyCalculator
     {
       SetHelpText();
 
+      SingleComposer.GetDynamicText("nuggets").SetNewText(NuggetsOutputText ?? "");
+
+      TryCalculate(InputText);
+      TryAdjustSliders();
+    }
+
+    private void OnTextChanged(string text)
+    {
+      InputText = text;
+
       if (!TryCalculate(InputText))
       {
         SingleComposer.GetTextInput("textinput").Font.Color = ColorUtil.Hex2Doubles("#DC143C");
@@ -266,14 +276,7 @@ namespace AlloyCalculator
         SingleComposer.GetTextInput("textinput").Font.Color = ColorUtil.Hex2Doubles("#FFFFFF");
         SingleComposer.GetDynamicText("error_text").SetNewText("");
       }
-
-      SingleComposer.GetDynamicText("nuggets").SetNewText(NuggetsOutputText ?? "");
-
-      TryCalculate(InputText);
-      TryAdjustSliders();
     }
-
-    private void OnTextChanged(string text) => InputText = text;
 
     private bool TryCalculate(string text)
     {
