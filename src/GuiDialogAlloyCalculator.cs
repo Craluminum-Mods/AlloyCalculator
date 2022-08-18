@@ -155,7 +155,6 @@ namespace AlloyCalculator
     private bool OnNewSliderValue(int num)
     {
       if (!TryCalculate(InputText)) return false;
-      SingleComposer.GetDynamicText("nuggets").SetNewText(NuggetsOutputText ?? "");
       return true;
     }
 
@@ -268,6 +267,8 @@ namespace AlloyCalculator
         SingleComposer.GetTextInput("textinput").Font.Color = ColorUtil.Hex2Doubles("#FFFFFF");
         SingleComposer.GetDynamicText("error_text").SetNewText("");
       }
+
+      SingleComposer.GetDynamicText("nuggets").SetNewText(NuggetsOutputText ?? "");
 
       TryCalculate(InputText);
       TryAdjustSliders();
