@@ -3,6 +3,7 @@
   "side": "client",
   "modid": "alloycalculator",
   "name": "Alloy Calculator",
+  "description": "In-game alloy calculator. \nCalculates amount of needed nuggets by metal units.",
   "authors": ["Craluminum2413"],
   "version": "1.0.0"
 }
