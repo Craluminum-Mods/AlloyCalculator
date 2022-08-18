@@ -9,27 +9,31 @@ namespace AlloyCalculator
 {
   public class AlloyCalculator : ModSystem
   {
-    ICoreClientAPI capi;
-    GuiDialog dialog;
+    ICoreClientAPI _capi;
+    GuiDialog _dialog;
 
     public override bool ShouldLoad(EnumAppSide forSide) => forSide == EnumAppSide.Client;
 
     public override void StartClientSide(ICoreClientAPI api)
     {
-      base.StartClientSide(api);
+      _capi = api;
 
-      dialog = new GuiDialogAlloyCalculator(api);
+      api.Input.RegisterHotKey(
+        "alloycalculator",
+        Lang.Get("alloycalculator:Open 'Alloy Calculator'"),
+        GlKeys.U,
+        HotkeyType.GUIOrOtherControls);
 
-      capi = api;
-      capi.Input.RegisterHotKey("alloycalculator", Lang.Get("alloycalculator:Open 'Alloy Calculator'"), GlKeys.U, HotkeyType.GUIOrOtherControls);
-      capi.Input.SetHotKeyHandler("alloycalculator", ToggleGui);
+      api.Input.SetHotKeyHandler("alloycalculator", ToggleGui);
     }
 
-    private bool ToggleGui(KeyCombination comb)
+    private bool ToggleGui(KeyCombination keyCombination)
     {
-      if (dialog.IsOpened()) dialog.TryClose();
-      else dialog.TryOpen();
-
+      if (_dialog is null) _dialog = new GuiDialogAlloyCalculator(_capi);
+      if (!_dialog.IsOpened()) return _dialog.TryOpen();
+      if (!_dialog.TryClose()) return true;
+      _dialog.Dispose();
+      _dialog = null;
       return true;
     }
   }

@@ -11,16 +11,9 @@ namespace AlloyCalculator
 {
   internal sealed class GuiDialogAlloyCalculator : GuiDialog
   {
-    public GuiDialogAlloyCalculator(ICoreClientAPI capi) : base(capi)
-    {
-      ComposeDialog();
-      id = capi.World.RegisterGameTickListener(delegate
-      {
-        UpdateHelpText();
-      }, 50);
-    }
+    public GuiDialogAlloyCalculator(ICoreClientAPI capi) : base(capi) { }
 
-    private readonly long id;
+    private long _timerId;
     private string InputText { get; set; }
     private string NuggetsOutputText { get; set; }
 
@@ -348,10 +341,18 @@ namespace AlloyCalculator
 
     private void OnTitleBarCloseClicked() => TryClose();
 
-    public override void Dispose()
+    public override bool TryOpen()
     {
-      base.Dispose();
-      capi.World.UnregisterGameTickListener(id);
+      if (!base.TryOpen()) return false;
+      ComposeDialog();
+      _timerId = capi.World.RegisterGameTickListener(_ => UpdateHelpText(), 50);
+      return true;
+    }
+
+    public override bool TryClose()
+    {
+      capi.World.UnregisterGameTickListener(_timerId);
+      return base.TryClose();
     }
   }
 }
