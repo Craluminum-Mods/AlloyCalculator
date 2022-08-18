@@ -245,15 +245,18 @@ namespace AlloyCalculator
       SetSlidersOnce();
     }
 
-    private void UpdateHelpText()
+    private void SetHelpText()
     {
       string alloyCode = CurrentAlloyRecipe.Output.Code.ToString();
 
       SingleComposer
       .GetDynamicText("alloys")
       .SetNewText($"{TextCurrent} {alloyCode}{GetRatiosText}\n\n{ListOfAlloys}");
+    }
 
-      SingleComposer.GetDynamicText("nuggets").SetNewText(NuggetsOutputText ?? "");
+    private void UpdateSomeValues()
+    {
+      SetHelpText();
 
       if (!TryCalculate(InputText))
       {
@@ -327,7 +330,7 @@ namespace AlloyCalculator
     {
       if (!base.TryOpen()) return false;
       ComposeDialog();
-      _timerId = capi.World.RegisterGameTickListener(_ => UpdateHelpText(), 50);
+      _timerId = capi.World.RegisterGameTickListener(_ => UpdateSomeValues(), 50);
       return true;
     }
 
