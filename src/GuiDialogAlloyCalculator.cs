@@ -137,10 +137,10 @@ namespace AlloyCalculator
       .AddAutoSizeHoverText(HoverTextUnits, FontSize(18), 300, textUnitsBounds, "units_hovertext")
       .AddTextInput(textInputBounds, OnTextChanged, null, "textinput")
       .AddDynamicText("", FontSize(13), rightColumn, "alloys")
-      .AddSlider(null, slider1Bounds, "slider1")
-      .AddSlider(null, slider2Bounds, "slider2")
-      .AddSlider(null, slider3Bounds, "slider3")
-      .AddSlider(null, slider4Bounds, "slider4")
+      .AddSlider(OnNewSliderValue, slider1Bounds, "slider1")
+      .AddSlider(OnNewSliderValue, slider2Bounds, "slider2")
+      .AddSlider(OnNewSliderValue, slider3Bounds, "slider3")
+      .AddSlider(OnNewSliderValue, slider4Bounds, "slider4")
       .AddDynamicText("", FontSize(18), slider1TextBounds, "percent1")
       .AddDynamicText("", FontSize(18), slider2TextBounds, "percent2")
       .AddDynamicText("", FontSize(18), slider3TextBounds, "percent3")
@@ -150,6 +150,13 @@ namespace AlloyCalculator
       .Compose();
 
       UpdateDropDown(SingleComposer.GetDropDown("dropdown").SelectedValue);
+    }
+
+    private bool OnNewSliderValue(int num)
+    {
+      if (!TryCalculate(InputText)) return false;
+      SingleComposer.GetDynamicText("nuggets").SetNewText(NuggetsOutputText ?? "");
+      return true;
     }
 
     private AlloyRecipe GetAlloyRecipe(string alloyCode)
