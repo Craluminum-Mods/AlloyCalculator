@@ -11,7 +11,10 @@ namespace AlloyCalculator
 {
     public sealed class GuiDialogAlloyCalculator : GuiDialog
     {
-        public GuiDialogAlloyCalculator(ICoreClientAPI capi) : base(capi) { }
+        public GuiDialogAlloyCalculator(ICoreClientAPI capi) : base(capi)
+        {
+            ComposeDialog();
+        }
 
         private long _timerId;
         private string InputText { get; set; }
@@ -334,7 +337,6 @@ namespace AlloyCalculator
         public override bool TryOpen()
         {
             if (!base.TryOpen()) return false;
-            ComposeDialog();
             _timerId = capi.World.RegisterGameTickListener(_ => UpdateSomeValues(), 50);
             return true;
         }
